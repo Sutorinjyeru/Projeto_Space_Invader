@@ -2,11 +2,23 @@ import pygame
 import math
 import os
 from random import randint
+from classes import Ship, Player, Boss
 
 # Initialize the pygame
 pygame.init()
 FPS = 120
 CLOCK = pygame.time.Clock()
+
+# defs do player
+def player(x, y):
+    SCREEN.blit(player_img, (x, y))
+
+# Player Object
+player_img = pygame.image.load(os.path.join("assets", "spaceship.png"))
+playerX = 370
+playerY = 480
+change_playerX = 0
+#player = Player(player_img, playerX, playerY, change_playerX)
 
 
 # Create the screen
@@ -40,17 +52,6 @@ GAME_OVER_FONT = pygame.font.Font("freesansbold.ttf", 64)
 def game_over_text():
     game_over = GAME_OVER_FONT.render("GAME OVER", True, (255, 255, 255))
     SCREEN.blit(game_over, (200, 250))
-
-
-# Player
-player_img = pygame.image.load(os.path.join("assets", "spaceship.png"))
-playerX = 370
-playerY = 480
-change_playerX = 0
-
-
-def player(x, y):
-    SCREEN.blit(player_img, (x, y))
 
 
 # Alien
@@ -145,8 +146,6 @@ while running:
             score_value += 1
 
         alien(alienX[i], alienY[i])
-
-    # Player
     if event.type == pygame.KEYDOWN:
         if event.key == pygame.K_LEFT:
             change_playerX = -2
