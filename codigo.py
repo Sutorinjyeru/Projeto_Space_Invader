@@ -2,7 +2,7 @@ import pygame
 import math
 import os
 from random import randint
-from classes import Ship, Player, Boss
+from classes import Player
 
 # Initialize the pygame
 pygame.init()
@@ -11,15 +11,15 @@ CLOCK = pygame.time.Clock()
 
 # defs do player
 def player(x, y):
-    SCREEN.blit(player_img, (x, y))
+    SCREEN.blit(player1.sprite, (x, y))
 
 # Player Object
 player_img = pygame.image.load(os.path.join("assets", "spaceship.png"))
 playerX = 370
 playerY = 480
 change_playerX = 0
-#player = Player(player_img, playerX, playerY, change_playerX)
 
+player1 = Player(player_img, playerX, playerY, change_playerX)
 
 # Create the screen
 SCREEN = pygame.display.set_mode((800, 600))
@@ -146,21 +146,23 @@ while running:
             score_value += 1
 
         alien(alienX[i], alienY[i])
+
+
     if event.type == pygame.KEYDOWN:
         if event.key == pygame.K_LEFT:
             change_playerX = -2
         if event.key == pygame.K_RIGHT:
             change_playerX = 2
         if event.key == pygame.K_CAPSLOCK and bullet_state == "ready":
-            bulletX = playerX
+            bulletX = player1.position_x
             fire_bullet(bulletX, bulletY)
 
     if event.type == pygame.K_UP:
         if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
             change_playerX = 1
-    playerX += change_playerX
+    player1.position_x += change_playerX
 
-    if playerX <= 10 or playerX >= 726:
+    if player1.position_x <= 10 or player1.position_x >= 726:
         change_playerX *= -1
 
     # Bullet Movement
@@ -172,6 +174,6 @@ while running:
         fire_bullet(bulletX, bulletY)
         bulletY -= bulletY_change
 
-    player(playerX, playerY)
+    player(player1.position_x, player1.position_x)
     show_score(TEST_X, TEST_Y)
     pygame.display.update()
