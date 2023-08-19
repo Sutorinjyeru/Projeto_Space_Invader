@@ -1,7 +1,9 @@
-import pygame
 import math
 import os
 from random import randint
+
+import pygame
+
 from classes import Player
 
 # Initialize the pygame
@@ -9,17 +11,18 @@ pygame.init()
 FPS = 120
 CLOCK = pygame.time.Clock()
 
-# defs do player
-def player(x, y):
-    SCREEN.blit(player1.sprite, (x, y))
 
 # Player Object
 player_img = pygame.image.load(os.path.join("assets", "spaceship.png"))
 playerX = 370
-playerY = 480
+playerY = 400
 change_playerX = 0
 
 player1 = Player(player_img, playerX, playerY, change_playerX)
+
+# defs do player
+def player(x, y):
+    SCREEN.blit(player1.sprite, (x, y))
 
 # Create the screen
 SCREEN = pygame.display.set_mode((800, 600))
@@ -174,6 +177,6 @@ while running:
         fire_bullet(bulletX, bulletY)
         bulletY -= bulletY_change
 
-    player(player1.position_x, player1.position_x)
+    player(player1.position_x, player1.position_y)
     show_score(TEST_X, TEST_Y)
     pygame.display.update()
