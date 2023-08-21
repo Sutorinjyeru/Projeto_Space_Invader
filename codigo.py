@@ -72,6 +72,14 @@ for i in range(num_aliens):
     alienX_change.append(1)
     alienY_change.append(40)
     alien_down.append(False)
+    if num_aliens == 0:
+        for i in range(num_aliens):
+            alien_img.append(pygame.image.load("assets\\alien.png"))
+            alienX.append(randint(0, 735))
+            alienY.append(randint(50, 150))
+            alienX_change.append(3)
+            alienY_change.append(60)
+            alien_down.append(False)
 
 
 def alien(x, y):
@@ -100,6 +108,7 @@ def isCollision(alienX, alienY, bulletX, bulletY):
     if distance < 27:
         return True
     return False
+    return Aliens
 
 
 # The program
