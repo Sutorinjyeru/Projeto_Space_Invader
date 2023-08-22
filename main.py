@@ -64,7 +64,9 @@ alienY = []
 alienX_change = []
 alienY_change = []
 alien_down = []
-num_aliens = 6
+initial_aliens = 6
+boss_aliens = 20
+num_aliens = 20
 boss_score = 5
 
 for i in range(num_aliens):
@@ -151,9 +153,10 @@ while running:
             score_value += 1
 
         alien(alienX[i], alienY[i])
+        if score_value < boss_score:
+            num_aliens = initial_aliens
         if score_value >= boss_score:
-            num_aliens = 0
-            break
+            num_aliens = boss_aliens
 
 
     if event.type == pygame.KEYDOWN:
